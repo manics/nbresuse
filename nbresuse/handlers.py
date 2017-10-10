@@ -11,8 +11,12 @@ def get_metrics():
     mem_limit = os.environ.get('MEM_LIMIT', None)
     if mem_limit is not None:
         mem_limit = int(mem_limit)
+
+    cpu = sum([p.cpu_percent() for p in all_processes])
+
     return {
         'rss': rss,
+        'cpu': cpu,
         'limits': {
             'memory': mem_limit
         }
